@@ -1,8 +1,7 @@
-import Loader from "./Loader.js";
 import Level1 from "./scenes/Level1.js";
 
-var config = {
-    type: Phaser.AUTO,
+const config = {
+    type: Phaser.CANVAS,
     width:800,
     height: 600,
 	parent: "container",  			//contenedor del juego(id)
@@ -11,9 +10,8 @@ var config = {
 		default: "arcade"
 	},
     scene: [
-        Loader, 
         Level1
     ]
 };
 
-var game = new Phaser.Game(config);
+new Phaser.Game(config);
