@@ -1,6 +1,8 @@
 class Level1 extends Phaser.Scene {
     constructor() {
-        super({key: "Level 1"});
+        super({
+            key: "Level1"
+        });
     }
 
     preload() {
@@ -10,6 +12,8 @@ class Level1 extends Phaser.Scene {
         this.load.atlas("cat", "cat/cat.png", "cat/cat_atlas.json");
 
         this.load.atlas("aliens", "aliens/aliens.png", "aliens/aliens_atlas.json");
+
+        this.load.image("red_laser", "lasers/red_laser.png");
     }
     create() {
         console.log(this);
@@ -30,7 +34,18 @@ class Level1 extends Phaser.Scene {
 
         this.alien7 = this.physics.add.sprite(this.width / 2, 50, "aliens").setScale(1.5);
         this.alien8 = this.physics.add.sprite(this.width / 2, this.height - 50, "aliens").setScale(1.5);
-        
+
+        this.events.on("load_red_laser1", () => {
+            this.red_laser1 = this.physics.add.image(this.alien7.x, this.alien7.y, "red_laser").setDepth(2);
+            this.red_laser1.setVelocityY(200);
+            this.red_laser2 = this.physics.add.image(this.alien8.x, this.alien8.y, "red_laser").setDepth(2);
+            this.red_laser2.setVelocityY(-200);
+            this.physics.add.collider(this.heroe, this.red_laser1, this.redLaserCollision, null, this);
+            this.physics.add.collider(this.heroe, this.red_laser2, this.redLaserCollision, null, this);
+            console.log(this.red_laser1);
+        });
+        this.cont = 0;
+
         //animations
         this.anims.create({  //heroe animations
             key: "walk_right",
@@ -62,6 +77,17 @@ class Level1 extends Phaser.Scene {
             repeat: -1,
             frameRate: 20
         });
+        this.anims.create({
+            key: "dead",
+            frames: this.anims.generateFrameNames(this.atlas, {
+                prefix: "dead_r_",
+                start: 0,
+                end: 3
+            }),
+            repeat: -1,
+            frameRate: 20
+        });
+
         this.anims.create({      //aliens animations
             key: "alien_right",
             frames: this.anims.generateFrameNames("aliens", {
@@ -102,6 +128,7 @@ class Level1 extends Phaser.Scene {
             repeat: -1,
             frameRate: 15
         });
+        
 
         this.anims.create({         //aliens animations 2
             key: "alien2_down",
@@ -152,7 +179,7 @@ class Level1 extends Phaser.Scene {
                 end: 11
             }),
             repeat: -1,
-            frameRate: 15
+            frameRate: 10
         });
         this.anims.create({       
             key: "alien3_up",
@@ -162,7 +189,7 @@ class Level1 extends Phaser.Scene {
                 end: 47
             }),
             repeat: -1,
-            frameRate: 15
+            frameRate: 10
         });
         this.alien7.anims.play("alien3_down");
         this.alien8.anims.play("alien3_up");
@@ -173,7 +200,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien1,
             paused: true,
             x: this.width / 2 - 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween2.play();
             }
@@ -183,7 +210,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien1,
             paused: true,
             y: this.height / 2 - 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween3.play();
             }
@@ -192,7 +219,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien1,
             paused: true,
             x: 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween4.play();
             }
@@ -201,7 +228,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien1,
             paused: true,
             y: 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween1.play();
             }
@@ -211,7 +238,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien2,
             paused: true,
             y: this.height / 2 -50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween6.play();
             }
@@ -221,7 +248,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien2,
             paused: true,
             x: this.width / 2 + 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween7.play();
             }
@@ -230,7 +257,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien2,
             paused: true,
             y: 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween8.play();
             }
@@ -239,7 +266,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien2,
             paused: true,
             x: this.width - 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween5.play();
             }
@@ -249,7 +276,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien3,
             paused: true,
             x: this.width / 2 + 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween10.play();
             }
@@ -259,7 +286,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien3,
             paused: true,
             y: this.height / 2 + 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween11.play();
             }
@@ -268,7 +295,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien3,
             paused: true,
             x: this.width - 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween12.play();
             }
@@ -277,7 +304,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien3,
             paused: true,
             y: this.height - 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween9.play();
             }
@@ -287,7 +314,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien4,
             paused: true,
             y: this.height / 2 + 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween14.play();
             }
@@ -297,7 +324,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien4,
             paused: true,
             x: this.width / 2 - 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween15.play();
             }
@@ -306,7 +333,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien4,
             paused: true,
             y: this.height - 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween16.play();
             }
@@ -315,7 +342,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien4,
             paused: true,
             x: 50,
-            duration: 1500,
+            duration: 1200,
             onComplete: () => {
                 this.tween13.play();
             }
@@ -325,7 +352,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien5,
             paused: true,
             x: 150,
-            duration: 3000,
+            duration: 1600,
             onComplete: () => {
                 this.tween18.play();
             }
@@ -334,7 +361,7 @@ class Level1 extends Phaser.Scene {
         this.tween18 = this.tweens.add({
             targets: this.alien5,
             paused: true,
-            duration: 3000,
+            duration: 1600,
             y: this.height - 150,
             onComplete: () => {
                 this.tween19.play();
@@ -344,7 +371,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien5,
             paused: true,
             x: this.width - 150,
-            duration: 3000,
+            duration: 1600,
             onComplete: () => {
                 this.tween20.play();
             }
@@ -353,7 +380,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien5,
             paused: true,
             y: 150,
-            duration: 3000,
+            duration: 1600,
             onComplete: () => {
                 this.tween17.play();
             }
@@ -363,7 +390,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien6,
             paused: true,
             x: this.width - 150,
-            duration: 3000,
+            duration: 1600,
             onComplete: () => {
                 this.tween22.play();
             }
@@ -372,7 +399,7 @@ class Level1 extends Phaser.Scene {
         this.tween22 = this.tweens.add({
             targets: this.alien6,
             paused: true,
-            duration: 3000,
+            duration: 1600,
             y: 150,
             onComplete: () => {
                 this.tween23.play();
@@ -382,7 +409,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien6,
             paused: true,
             x: 150,
-            duration: 3000,
+            duration: 1600,
             onComplete: () => {
                 this.tween24.play();
             }
@@ -391,7 +418,7 @@ class Level1 extends Phaser.Scene {
             targets: this.alien6,
             paused: true,
             y: this.height - 150,
-            duration: 3000,
+            duration: 1600,
             onComplete: () => {
                 this.tween21.play();
             }
@@ -420,6 +447,12 @@ class Level1 extends Phaser.Scene {
         //physics
     }
     update(time, delta) {
+        ++this.cont;
+        if (this.cont == 200) {
+            this.cont = 0;
+            this.events.emit("load_red_laser1");
+        }
+
         if (this.right.isDown) {
             this.heroe.x += this.velocityHeroe;
             this.heroe.anims.play("walk_right", true);
@@ -501,6 +534,10 @@ class Level1 extends Phaser.Scene {
         console.log("Colision con alien");
         this.heroe.setPosition(this.width / 2, this.height / 2);
     }    
+    redLaserCollision() {
+        console.log("Muerto :(");
+        this.scene.pause("Level1");
+    }
 }
 
 export default Level1;
