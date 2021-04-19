@@ -99,163 +99,156 @@ class Level1 extends Phaser.Scene {
         //animations
 
         //tweens(aliens' movements)
-        this.timeline1 = this.tweens.timeline({
-           
-            tweens: [
-                {
-                    targets: this.alien1,
-                    x: this.width / 2 - 50,
-                    duration: 1500,
-                    onStart: () => {
-                        //this.alien1.anims.play("alien_right", true);
-                        console.log("hola");
-                    }
-                },
-                {
-                    targets: this.alien1,
-                    y: this.height / 2 - 50,
-                    duration: 1500,
-                    onStart: () => {
-                        //this.alien1.anims.play("alien_down", true);
-                        console.log("hola");
-                    }
-                },
-                {
-                    targets: this.alien1,
-                    x: 50,
-                    duration: 1500,
-                    onStart: () => {
-                        // this.alien1.anims.play("alien_left", true);
-                        console.log("hola");
-                    }
-                },
-                {
-                    targets: this.alien1,
-                    y: 50,
-                    duration: 1500,
-                    onStart: () => {
-                        // this.alien1.anims.play("alien_up", true);
-                        console.log("hola");
-                    }
-                }
-            ],
+        this.tween1 = this.tweens.add({
+            targets: this.alien1,
+            paused: true,
+            x: this.width / 2 - 50,
+            duration: 1500,
             onComplete: () => {
-                this.events.emit("repeat");
+                this.tween2.play();
             }
         });
-        
-        this.timeline3 = this.tweens.timeline({
-    
-            tweens: [
-                {
-                    targets: this.alien3,
-                    x: this.width / 2 + 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien3.anims.play("alien_left", true);
-                    }
-                },
-                {
-                    targets: this.alien3,
-                    y: this.height / 2 + 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien3.anims.play("alien_up", true);
-                    }
-                },
-                {
-                    targets: this.alien3,
-                    x: this.width - 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien3.anims.play("alien_right", true);
-                    }
-                },
-                {
-                    targets: this.alien3,
-                    y: this.height - 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien3.anims.play("alien_down", true);
-                    }
-                }
-            ]
+        this.tween1.play();
+        this.tween2 = this.tweens.add({
+            targets: this.alien1,
+            paused: true,
+            y: this.height / 2 - 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween3.play();
+            }
         });
-        
-        this.timeline4 = this.tweens.timeline({
-            
-            tweens: [
-                {
-                    targets: this.alien4,
-                    y: this.height / 2 + 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien4.anims.play("alien_up", true);
-                    }
-                },
-                {
-                    targets: this.alien4,
-                    x: this.width / 2 - 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien4.anims.play("alien_right", true);
-                    }
-                },
-                {
-                    targets: this.alien4,
-                    y: this.height - 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien4.anims.play("alien_down", true);
-                    }
-                },
-                {
-                    targets: this.alien4,
-                    x: 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien4.anims.play("alien_left", true);
-                    }
-                }
-            ]
+        this.tween3 = this.tweens.add({
+            targets: this.alien1,
+            paused: true,
+            x: 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween4.play();
+            }
+        });
+        this.tween4 = this.tweens.add({
+            targets: this.alien1,
+            paused: true,
+            y: 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween1.play();
+            }
         });
 
-        this.timeline2 = this.tweens.timeline({
-            
-            tweens: [
-                {
-                    targets: this.alien2,
-                    y: this.height / 2 - 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien2.anims.play("alien_down", true);
-                    }
-                },
-                {
-                    targets: this.alien2,
-                    x: this.width / 2 + 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien2.anims.play("alien_left", true);
-                    }
-                },
-                {
-                    targets: this.alien2,
-                    y: 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien2.anims.play("alien_up", true);
-                    }
-                },
-                {
-                    targets: this.alien2,
-                    x: this.width - 50,
-                    duration: 1500,
-                    onStart: () => {
-                        this.alien2.anims.play("alien_right", true);
-                    }
-                }
-            ]
+        this.tween5 = this.tweens.add({
+            targets: this.alien2,
+            paused: true,
+            y: this.height / 2 -50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween6.play();
+            }
+        });
+        this.tween5.play();
+        this.tween6 = this.tweens.add({
+            targets: this.alien2,
+            paused: true,
+            x: this.width / 2 + 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween7.play();
+            }
+        });
+        this.tween7 = this.tweens.add({
+            targets: this.alien2,
+            paused: true,
+            y: 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween8.play();
+            }
+        });
+        this.tween8 = this.tweens.add({
+            targets: this.alien2,
+            paused: true,
+            x: this.width - 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween5.play();
+            }
+        });
+
+        this.tween9 = this.tweens.add({
+            targets: this.alien3,
+            paused: true,
+            x: this.width / 2 + 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween10.play();
+            }
+        });
+        this.tween9.play();
+        this.tween10 = this.tweens.add({
+            targets: this.alien3,
+            paused: true,
+            y: this.height / 2 + 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween11.play();
+            }
+        });
+        this.tween11 = this.tweens.add({
+            targets: this.alien3,
+            paused: true,
+            x: this.width - 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween12.play();
+            }
+        });
+        this.tween12 = this.tweens.add({
+            targets: this.alien3,
+            paused: true,
+            y: this.height - 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween9.play();
+            }
+        });
+
+        this.tween13 = this.tweens.add({
+            targets: this.alien4,
+            paused: true,
+            y: this.height / 2 + 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween14.play();
+            }
+        });
+        this.tween13.play();
+        this.tween14 = this.tweens.add({
+            targets: this.alien4,
+            paused: true,
+            x: this.width / 2 - 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween15.play();
+            }
+        });
+        this.tween15 = this.tweens.add({
+            targets: this.alien4,
+            paused: true,
+            y: this.height - 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween16.play();
+            }
+        });
+        this.tween16 = this.tweens.add({
+            targets: this.alien4,
+            paused: true,
+            x: 50,
+            duration: 1500,
+            onComplete: () => {
+                this.tween13.play();
+            }
         });
         //tweens(aliens' movements)
 
@@ -291,6 +284,46 @@ class Level1 extends Phaser.Scene {
             this.heroe.anims.play("walk_left", true);
         } else {
             this.heroe.anims.play("idle", true);
+        }
+
+        if (this.tween1.isPlaying()) {
+            this.alien1.anims.play("alien_right", true);
+        } else if (this.tween2.isPlaying()) {
+            this.alien1.anims.play("alien_down", true);
+        } else if (this.tween3.isPlaying()) {
+            this.alien1.anims.play("alien_left", true);
+        } else if (this.tween4.isPlaying()) {
+            this.alien1.anims.play("alien_up", true);
+        }
+
+        if (this.tween5.isPlaying()) {
+            this.alien2.anims.play("alien_down", true);
+        } else if (this.tween6.isPlaying()) {
+            this.alien2.anims.play("alien_left", true);
+        } else if (this.tween7.isPlaying()) {
+            this.alien2.anims.play("alien_up", true);
+        } else if (this.tween8.isPlaying()) {
+            this.alien2.anims.play("alien_right", true);
+        }
+
+        if (this.tween9.isPlaying()) {
+            this.alien3.anims.play("alien_left", true);
+        } else if (this.tween10.isPlaying()) {
+            this.alien3.anims.play("alien_up", true);
+        } else if (this.tween11.isPlaying()) {
+            this.alien3.anims.play("alien_right", true);
+        } else if (this.tween12.isPlaying()) {
+            this.alien3.anims.play("alien_down", true);
+        }
+
+        if (this.tween13.isPlaying()) {
+            this.alien4.anims.play("alien_up", true);
+        } else if (this.tween14.isPlaying()) {
+            this.alien4.anims.play("alien_right", true);
+        } else if (this.tween15.isPlaying()) {
+            this.alien4.anims.play("alien_down", true);
+        } else if (this.tween16.isPlaying()) {
+            this.alien4.anims.play("alien_left", true);
         }
     }
 
