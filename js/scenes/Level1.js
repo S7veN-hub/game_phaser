@@ -24,6 +24,12 @@ class Level1 extends Phaser.Scene {
         this.alien2 = this.physics.add.sprite(this.width - 50, 50, "aliens").setScale(1.5);
         this.alien3 = this.physics.add.sprite(this.width - 50, this.height - 50, "aliens").setScale(1.5);
         this.alien4 = this.physics.add.sprite(50, this.height - 50, "aliens").setScale(1.5);
+
+        this.alien5 = this.physics.add.sprite(this.width - 150, 150, "aliens").setScale(1.5);
+        this.alien6 = this.physics.add.sprite(150, this.height - 150, "aliens").setScale(1.5);
+
+        this.alien7 = this.physics.add.sprite(this.width / 2, 50, "aliens").setScale(1.5);
+        this.alien8 = this.physics.add.sprite(this.width / 2, this.height - 50, "aliens").setScale(1.5);
         
         //animations
         this.anims.create({  //heroe animations
@@ -96,6 +102,70 @@ class Level1 extends Phaser.Scene {
             repeat: -1,
             frameRate: 15
         });
+
+        this.anims.create({         //aliens animations 2
+            key: "alien2_down",
+            frames: this.anims.generateFrameNames("aliens", {
+                prefix: "aliens_",
+                start: 51,
+                end: 53
+            }),
+            repeat: -1,
+            frameRate: 15
+        });
+        this.anims.create({
+            key: "alien2_left",
+            frames: this.anims.generateFrameNames("aliens", {
+                prefix: "aliens_",
+                start: 63,
+                end: 65
+            }),
+            repeat: -1,
+            frameRate: 15
+        });
+        this.anims.create({
+            key: "alien2_right",
+            frames: this.anims.generateFrameNames("aliens", {
+                prefix: "aliens_",
+                start: 75,
+                end: 77
+            }),
+            repeat: -1,
+            frameRate: 15
+        });
+        this.anims.create({       
+            key: "alien2_up",
+            frames: this.anims.generateFrameNames("aliens", {
+                prefix: "aliens_",
+                start: 87,
+                end: 89
+            }),
+            repeat: -1,
+            frameRate: 15
+        });
+
+        this.anims.create({       //aliens animations 3
+            key: "alien3_down",
+            frames: this.anims.generateFrameNames("aliens", {
+                prefix: "aliens_",
+                start: 9,
+                end: 11
+            }),
+            repeat: -1,
+            frameRate: 15
+        });
+        this.anims.create({       
+            key: "alien3_up",
+            frames: this.anims.generateFrameNames("aliens", {
+                prefix: "aliens_",
+                start: 45,
+                end: 47
+            }),
+            repeat: -1,
+            frameRate: 15
+        });
+        this.alien7.anims.play("alien3_down");
+        this.alien8.anims.play("alien3_up");
         //animations
 
         //tweens(aliens' movements)
@@ -250,6 +320,82 @@ class Level1 extends Phaser.Scene {
                 this.tween13.play();
             }
         });
+
+        this.tween17 = this.tweens.add({
+            targets: this.alien5,
+            paused: true,
+            x: 150,
+            duration: 3000,
+            onComplete: () => {
+                this.tween18.play();
+            }
+        });
+        this.tween17.play();
+        this.tween18 = this.tweens.add({
+            targets: this.alien5,
+            paused: true,
+            duration: 3000,
+            y: this.height - 150,
+            onComplete: () => {
+                this.tween19.play();
+            }
+        });
+        this.tween19 = this.tweens.add({
+            targets: this.alien5,
+            paused: true,
+            x: this.width - 150,
+            duration: 3000,
+            onComplete: () => {
+                this.tween20.play();
+            }
+        });
+        this.tween20 = this.tweens.add({
+            targets: this.alien5,
+            paused: true,
+            y: 150,
+            duration: 3000,
+            onComplete: () => {
+                this.tween17.play();
+            }
+        });
+
+        this.tween21 = this.tweens.add({
+            targets: this.alien6,
+            paused: true,
+            x: this.width - 150,
+            duration: 3000,
+            onComplete: () => {
+                this.tween22.play();
+            }
+        });
+        this.tween21.play();
+        this.tween22 = this.tweens.add({
+            targets: this.alien6,
+            paused: true,
+            duration: 3000,
+            y: 150,
+            onComplete: () => {
+                this.tween23.play();
+            }
+        });
+        this.tween23 = this.tweens.add({
+            targets: this.alien6,
+            paused: true,
+            x: 150,
+            duration: 3000,
+            onComplete: () => {
+                this.tween24.play();
+            }
+        });
+        this.tween24 = this.tweens.add({
+            targets: this.alien6,
+            paused: true,
+            y: this.height - 150,
+            duration: 3000,
+            onComplete: () => {
+                this.tween21.play();
+            }
+        });
         //tweens(aliens' movements)
 
         console.log(Phaser.Input.Keyboard.KeyCodes); //types code
@@ -263,10 +409,14 @@ class Level1 extends Phaser.Scene {
         this.velocityHeroe = 5;
 
         //physics
-        this.physics.add.collider(this.heroe, this.alien1, this.collision, null, this);
-        this.physics.add.collider(this.heroe, this.alien2, this.collision, null, this);
-        this.physics.add.collider(this.heroe, this.alien3, this.collision, null, this);
-        this.physics.add.collider(this.heroe, this.alien4, this.collision, null, this);
+        this.physics.add.collider(this.heroe, this.alien1, this.alienCollision, null, this);
+        this.physics.add.collider(this.heroe, this.alien2, this.alienCollision, null, this);
+        this.physics.add.collider(this.heroe, this.alien3, this.alienCollision, null, this);
+        this.physics.add.collider(this.heroe, this.alien4, this.alienCollision, null, this);
+        this.physics.add.collider(this.heroe, this.alien5, this.alienCollision, null, this);
+        this.physics.add.collider(this.heroe, this.alien6, this.alienCollision, null, this);
+        this.physics.add.collider(this.heroe, this.alien7, this.alienCollision, null, this);
+        this.physics.add.collider(this.heroe, this.alien8, this.alienCollision, null, this);
         //physics
     }
     update(time, delta) {
@@ -325,10 +475,30 @@ class Level1 extends Phaser.Scene {
         } else if (this.tween16.isPlaying()) {
             this.alien4.anims.play("alien_left", true);
         }
+
+        if (this.tween17.isPlaying()) {
+            this.alien5.anims.play("alien2_left", true);
+        } else if (this.tween18.isPlaying()) {
+            this.alien5.anims.play("alien2_down", true);
+        } else if (this.tween19.isPlaying()) {
+            this.alien5.anims.play("alien2_right", true);
+        } else if (this.tween20.isPlaying()) {
+            this.alien5.anims.play("alien2_up", true);
+        }
+
+        if (this.tween21.isPlaying()) {
+            this.alien6.anims.play("alien2_right", true);
+        } else if (this.tween22.isPlaying()) {
+            this.alien6.anims.play("alien2_up", true);
+        } else if (this.tween23.isPlaying()) {
+            this.alien6.anims.play("alien2_left", true);
+        } else if (this.tween24.isPlaying()) {
+            this.alien6.anims.play("alien2_down", true);
+        }
     }
 
-    collision() {
-        console.log("Hubo contacto");
+    alienCollision() {
+        console.log("Colision con alien");
         this.heroe.setPosition(this.width / 2, this.height / 2);
     }    
 }
