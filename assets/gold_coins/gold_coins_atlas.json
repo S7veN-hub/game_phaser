@@ -1,0 +1,112 @@
+{
+    "frames": [
+        {
+            "filename": "gold_0",
+            "frame": {
+                "w": 21,
+                "h": 21,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "gold_1",
+            "frame": {
+                "w": 21,
+                "h": 21,
+                "x": 0,
+                "y": 21
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "gold_2",
+            "frame": {
+                "w": 21,
+                "h": 21,
+                "x": 0,
+                "y": 42
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "gold_3",
+            "frame": {
+                "w": 21,
+                "h": 21,
+                "x": 0,
+                "y": 63
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "gold_4",
+            "frame": {
+                "w": 21,
+                "h": 21,
+                "x": 0,
+                "y": 84
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "gold_5",
+            "frame": {
+                "w": 21,
+                "h": 21,
+                "x": 0,
+                "y": 105
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "gold_6",
+            "frame": {
+                "w": 21,
+                "h": 21,
+                "x": 0,
+                "y": 126
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "gold_7",
+            "frame": {
+                "w": 21,
+                "h": 21,
+                "x": 0,
+                "y": 147
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
