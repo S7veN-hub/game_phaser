@@ -29,7 +29,7 @@ class Level1 extends Phaser.Scene {
         this.silverCont = 0;
         this.goldCont = 0;
 
-        this.heroe = this.physics.add.sprite(400, 300, "dog").setScale(0.15);
+        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2, "dog").setScale(0.15);
         this.heroe.setCollideWorldBounds(true);
 
         this.alien1 = this.physics.add.sprite(50, 50, "aliens").setScale(1.5);

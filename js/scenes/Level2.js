@@ -12,6 +12,8 @@ class Level2 extends Phaser.Scene {
         this.load.atlas("cat", "cat/cat.png", "cat/cat_atlas.json");
 
         this.load.image("platform", "platform/platform.png");
+
+        this.load.image("ovni", "ovni/ovni.png");
     }
     create() {
         console.log(this);
@@ -19,9 +21,11 @@ class Level2 extends Phaser.Scene {
         this.width = 800;
         this.height = 600;
 
-        this.heroe = this.physics.add.sprite(400, 350, "dog").setScale(0.15);
+        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2 + 50, "dog").setScale(0.15);
         this.heroe.setCollideWorldBounds(true);
         this.heroe.body.setGravityY(500);
+
+        this.ovni = this.physics.add.image(this.width / 2, 100, "ovni").setScale(0.25).setImmovable(true);
 
         this.platform1 = this.physics.add.image(400, 500, "platform").setScale(0.2).setImmovable(true);
         this.platform2 = this.physics.add.image(100, 300, "platform").setScale(0.2).setImmovable(true);
@@ -116,6 +120,7 @@ class Level2 extends Phaser.Scene {
         this.physics.add.collider(this.heroe, this.platform3);
         this.physics.add.collider(this.heroe, this.platform4);
         this.physics.add.collider(this.heroe, this.platform5);
+        this.physics.add.collider(this.heroe, this.ovni);
         //physics
     }
     update(time, delta) {
