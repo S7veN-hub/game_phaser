@@ -21,17 +21,19 @@ class Level2 extends Phaser.Scene {
         this.width = 800;
         this.height = 600;
 
+        this.physics.world.setBoundsCollision(true, true, true, false);
+
         this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2 + 50, "dog").setScale(0.15);
         this.heroe.setCollideWorldBounds(true);
         this.heroe.body.setGravityY(500);
 
         this.ovni = this.physics.add.image(this.width / 2, 100, "ovni").setScale(0.25).setImmovable(true);
 
-        this.platform1 = this.physics.add.image(400, 500, "platform").setScale(0.2).setImmovable(true);
-        this.platform2 = this.physics.add.image(100, 300, "platform").setScale(0.2).setImmovable(true);
-        this.platform3 = this.physics.add.image(this.width - 100, 500, "platform").setScale(0.2).setImmovable(true);
-        this.platform4 = this.physics.add.image(this.width / 2, this.height / 2, "platform").setScale(0.2).setImmovable(true);
-        this.platform5 = this.physics.add.image(this.width / 2, this.height / 2, "platform").setScale(0.2).setImmovable(true);
+        this.platform1 = this.physics.add.image(400, 550, "platform").setScale(0.2).setImmovable(true);
+        this.platform2 = this.physics.add.image(100, 350, "platform").setScale(0.2).setImmovable(true);
+        this.platform3 = this.physics.add.image(this.width - 100, 600, "platform").setScale(0.2).setImmovable(true);
+        this.platform4 = this.physics.add.image(this.width / 2, this.height / 2 + 50, "platform").setScale(0.2).setImmovable(true);
+        this.platform5 = this.physics.add.image(this.width / 2, this.height / 2 + 50, "platform").setScale(0.2).setImmovable(true);
 
         //animations
         this.anims.create({  //heroe animations
@@ -79,14 +81,14 @@ class Level2 extends Phaser.Scene {
         //tweens
         this.tween1 = this.tweens.add({     //platform movements
             targets: this.platform2,
-            y: 500,
+            y: 600,
             duration: 2000,
             yoyo: true,
             repeat: -1
         });
         this.tween2 = this.tweens.add({
             targets: this.platform3,
-            y: 300,
+            y: 350,
             duration: 2000,
             yoyo: true,
             repeat: -1
@@ -104,6 +106,44 @@ class Level2 extends Phaser.Scene {
             duration: 3000,
             yoyo: true,
             repeat: -1
+        });
+
+        this.tween5 = this.tweens.add({       //ovni movements
+            targets: this.ovni,
+            paused: true,
+            x: this.width + 200,
+            duration: 2000,
+            onComplete: () => {
+                this.tween6.play();
+            }
+        });
+        this.tween5.play();
+        this.tween6 = this.tweens.add({
+            targets: this.ovni,
+            paused: true,
+            x: this.width / 2,
+            duration: 2000,
+            onComplete: () => {
+                this.tween7.play();
+            }
+        });
+        this.tween7 = this.tweens.add({
+            targets: this.ovni,
+            paused: true,
+            x: -200,
+            duration: 2000,
+            onComplete: () => {
+                this.tween8.play();
+            }
+        });
+        this.tween8 = this.tweens.add({
+            targets: this.ovni,
+            paused: true,
+            x: this.width / 2,
+            duration: 2000,
+            onComplete: () => {
+                this.tween5.play();
+            }
         });
         //tweens
         
