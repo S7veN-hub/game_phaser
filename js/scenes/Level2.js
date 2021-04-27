@@ -14,12 +14,16 @@ class Level2 extends Phaser.Scene {
         this.load.image("platform", "platform/platform.png");
 
         this.load.image("ovni", "ovni/ovni.png");
+
+        this.load.image("ball_energy", "lasers/ball_energy.png");
+        this.load.image("ball_energy_h", "lasers/ball_energy_h.png");
     }
     create() {
         console.log(this);
         this.atlas = "dog";
         this.width = 800;
         this.height = 600;
+        this.cont = 0;
 
         this.physics.world.setBoundsCollision(true, true, true, false);
 
@@ -35,6 +39,23 @@ class Level2 extends Phaser.Scene {
         this.platform4 = this.physics.add.image(this.width / 2, this.height / 2 + 50, "platform").setScale(0.2).setImmovable(true);
         this.platform5 = this.physics.add.image(this.width / 2, this.height / 2 + 50, "platform").setScale(0.2).setImmovable(true);
 
+        this.events.on("load_ball_energy", () => {
+            this.ball_energy1 = this.physics.add.image(this.ovni.x, this.ovni.y, "ball_energy").setScale(0.5);
+            this.ball_energy1.setGravity(0, 600);
+            this.ball_energy2 = this.physics.add.image(this.ovni.x, this.ovni.y, "ball_energy").setScale(0.5);
+            this.ball_energy2.setGravity(-300, 600);
+            this.ball_energy3 = this.physics.add.image(this.ovni.x, this.ovni.y, "ball_energy").setScale(0.5);
+            this.ball_energy3.setGravity(300, 600);
+
+            this.physics.add.collider(this.heroe, this.ball_energy1, this.laserCollision, null, this);
+            this.physics.add.collider(this.heroe, this.ball_energy2, this.laserCollision, null, this);
+            this.physics.add.collider(this.heroe, this.ball_energy3, this.laserCollision, null, this);
+        });
+
+        this.events.on("fallen_heroe", () => {
+            console.log("Muerto :(");
+            this.scene.pause("Level2");
+        });
         //animations
         this.anims.create({  //heroe animations
             key: "walk_right",
@@ -164,6 +185,16 @@ class Level2 extends Phaser.Scene {
         //physics
     }
     update(time, delta) {
+        this.cont++;
+        if (this.cont == 100) {
+            this.cont = 0;
+            this.events.emit("load_ball_energy");
+        }
+
+        if (this.heroe.y > this.height + 200) {
+            this.events.emit("fallen_heroe");
+        }
+
         if (this.right.isDown) {
             this.heroe.x += 3;
             this.heroe.anims.play("walk_right", true);
@@ -178,11 +209,14 @@ class Level2 extends Phaser.Scene {
         }
         if (this.down.isDown) {
             this.heroe.y += 0;
-            // this.heroe.anims.play("walk_left", true);
         }
         if (this.right.isUp && this.left.isUp && this.up.isUp) {
             this.heroe.anims.play("idle", true);
         }
+    }
+
+    laserCollision() {
+        this.events.emit("fallen_heroe");
     }
 }
 
