@@ -20,7 +20,7 @@ class Level2 extends Phaser.Scene {
     }
     create() {
         console.log(this);
-        this.atlas = "dog";
+        this.atlas = "cat";
         this.width = 800;
         this.height = 600;
         this.cont = 0;
