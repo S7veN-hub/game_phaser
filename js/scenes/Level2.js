@@ -17,13 +17,20 @@ class Level2 extends Phaser.Scene {
 
         this.load.image("ball_energy", "lasers/ball_energy.png");
         this.load.image("ball_energy_h", "lasers/ball_energy_h.png");
+
+        this.load.atlas("copper_coins", "copper_coins/copper_coins.png", "copper_coins/copper_coins_atlas.json");
+        this.load.atlas("silver_coins", "silver_coins/silver_coins.png", "silver_coins/silver_coins_atlas.json");
+        this.load.atlas("gold_coins", "gold_coins/gold_coins.png", "gold_coins/gold_coins_atlas.json");
     }
     create() {
         console.log(this);
-        this.atlas = "cat";
+        this.atlas = "dog";
         this.width = 800;
         this.height = 600;
         this.cont = 0;
+        this.copperCont = 0;
+        this.silverCont = 0;
+        this.goldCont = 0;
 
         this.physics.world.setBoundsCollision(true, true, true, false);
 
@@ -38,6 +45,11 @@ class Level2 extends Phaser.Scene {
         this.platform3 = this.physics.add.image(this.width - 100, 600, "platform").setScale(0.2).setImmovable(true);
         this.platform4 = this.physics.add.image(this.width / 2, this.height / 2 + 50, "platform").setScale(0.2).setImmovable(true);
         this.platform5 = this.physics.add.image(this.width / 2, this.height / 2 + 50, "platform").setScale(0.2).setImmovable(true);
+        
+        this.copper1 = this.physics.add.sprite(this.width - 100, 500, "copper_coins").setDepth(-1);
+        this.copper2 = this.physics.add.sprite(100, 500, "copper_coins").setDepth(-1);
+        this.copper3 = this.physics.add.sprite(this.width - 100, 250, "copper_coins").setDepth(-1);
+        this.copper4 = this.physics.add.sprite(100, 250, "copper_coins").setDepth(-1);
 
         this.events.on("load_ball_energy", () => {
             this.ball_energy1 = this.physics.add.image(this.ovni.x, this.ovni.y, "ball_energy").setScale(0.5);
@@ -51,11 +63,64 @@ class Level2 extends Phaser.Scene {
             this.physics.add.collider(this.heroe, this.ball_energy2, this.laserCollision, null, this);
             this.physics.add.collider(this.heroe, this.ball_energy3, this.laserCollision, null, this);
         });
+        this.events.on("load_silver_coins", () => {
+            this.silver1 = this.physics.add.sprite(this.width / 2 + 100, this.height / 2 + 100, "silver_coins").setDepth(-1);
+            this.silver2 = this.physics.add.sprite(this.width / 2 - 100, this.height / 2 + 100, "silver_coins").setDepth(-1);
+            this.silver3 = this.physics.add.sprite(this.width / 2 + 100, 250, "silver_coins").setDepth(-1);
+            this.silver4 = this.physics.add.sprite(this.width / 2 - 100, 250, "silver_coins").setDepth(-1);
+
+            this.anims.create({       //silver coins animation
+                key: "silver",
+                frames: this.anims.generateFrameNames("silver_coins", {
+                    prefix: "silver_",
+                    start: 0,
+                    end: 7
+                }),
+                repeat: -1,
+                frameRate: 10
+            });
+            this.silver1.anims.play("silver");
+            this.silver2.anims.play("silver");
+            this.silver3.anims.play("silver");
+            this.silver4.anims.play("silver");
+
+            this.physics.add.collider(this.heroe, this.silver1, this.silverCatched, null, this);
+            this.physics.add.collider(this.heroe, this.silver2, this.silverCatched, null, this);
+            this.physics.add.collider(this.heroe, this.silver3, this.silverCatched, null, this);
+            this.physics.add.collider(this.heroe, this.silver4, this.silverCatched, null, this);
+        });
+        this.events.on("load_gold_coins", () => {
+            this.gold1 = this.physics.add.sprite(this.width / 2 - 200, this.height / 2 - 100, "gold_coins").setDepth(-1);
+            this.gold2 = this.physics.add.sprite(this.width / 2 - 100, this.height / 2 - 100, "gold_coins").setDepth(-1);
+            this.gold3 = this.physics.add.sprite(this.width / 2 + 100, this.height / 2 - 100, "gold_coins").setDepth(-1);
+            this.gold4 = this.physics.add.sprite(this.width / 2 + 200, this.height / 2 - 100, "gold_coins").setDepth(-1);
+
+            this.anims.create({       //gold coins animation
+                key: "gold",
+                frames: this.anims.generateFrameNames("gold_coins", {
+                    prefix: "gold_",
+                    start: 0,
+                    end: 7
+                }),
+                repeat: -1,
+                frameRate: 10
+            });
+            this.gold1.anims.play("gold");
+            this.gold2.anims.play("gold");
+            this.gold3.anims.play("gold");
+            this.gold4.anims.play("gold");
+
+            this.physics.add.collider(this.heroe, this.gold1, this.goldCatched, null, this);
+            this.physics.add.collider(this.heroe, this.gold2, this.goldCatched, null, this);
+            this.physics.add.collider(this.heroe, this.gold3, this.goldCatched, null, this);
+            this.physics.add.collider(this.heroe, this.gold4, this.goldCatched, null, this);
+        });
 
         this.events.on("fallen_heroe", () => {
             console.log("Muerto :(");
             this.scene.pause("Level2");
         });
+
         //animations
         this.anims.create({  //heroe animations
             key: "walk_right",
@@ -97,33 +162,48 @@ class Level2 extends Phaser.Scene {
             repeat: -1,
             frameRate: 20
         });
+
+        this.anims.create({       //copper coins animation
+            key: "copper",
+            frames: this.anims.generateFrameNames("copper_coins", {
+                prefix: "copper_",
+                start: 0,
+                end: 7
+            }),
+            repeat: -1,
+            frameRate: 10
+        });
+        this.copper1.anims.play("copper");
+        this.copper2.anims.play("copper");
+        this.copper3.anims.play("copper");
+        this.copper4.anims.play("copper");
         //animations
 
         //tweens
         this.tween1 = this.tweens.add({     //platform movements
             targets: this.platform2,
             y: 600,
-            duration: 2000,
+            duration: 4000,
             yoyo: true,
             repeat: -1
         });
         this.tween2 = this.tweens.add({
             targets: this.platform3,
             y: 350,
-            duration: 2000,
+            duration: 4000,
             yoyo: true,
             repeat: -1
         });
         this.tween3 = this.tweens.add({
             targets: this.platform4,
-            x: 100,
+            x: 150,
             duration: 3000,
             yoyo: true,
             repeat: -1
         });
         this.tween4 = this.tweens.add({
             targets: this.platform5,
-            x: this.width - 100,
+            x: this.width - 150,
             duration: 3000,
             yoyo: true,
             repeat: -1
@@ -182,6 +262,10 @@ class Level2 extends Phaser.Scene {
         this.physics.add.collider(this.heroe, this.platform4);
         this.physics.add.collider(this.heroe, this.platform5);
         this.physics.add.collider(this.heroe, this.ovni);
+        this.physics.add.collider(this.heroe, this.copper1, this.copperCatched, null, this);
+        this.physics.add.collider(this.heroe, this.copper2, this.copperCatched, null, this);
+        this.physics.add.collider(this.heroe, this.copper3, this.copperCatched, null, this);
+        this.physics.add.collider(this.heroe, this.copper4, this.copperCatched, null, this);
         //physics
     }
     update(time, delta) {
@@ -193,6 +277,23 @@ class Level2 extends Phaser.Scene {
 
         if (this.heroe.y > this.height + 200) {
             this.events.emit("fallen_heroe");
+        }
+
+        if (this.copperCont == 4) {
+            this.copperCont = 0;
+            console.log("All coppers catched");
+            this.events.emit("load_silver_coins");
+        }
+        if (this.silverCont == 4) {
+            this.silverCont = 0;
+            console.log("All silvers catched");
+            this.events.emit("load_gold_coins");
+        }
+        if (this.goldCont == 4) {
+            this.goldCont = 0;
+            console.log("All gold catched");
+            console.log("Ganaste ;)");
+            this.scene.pause("Level2");
         }
 
         if (this.right.isDown) {
@@ -217,6 +318,19 @@ class Level2 extends Phaser.Scene {
 
     laserCollision() {
         this.events.emit("fallen_heroe");
+    }
+
+    copperCatched(heroe, copper) {
+        copper.destroy();
+        this.copperCont++;
+    }
+    silverCatched(heroe, silver) {
+        silver.destroy();
+        this.silverCont++;
+    }
+    goldCatched(heroe, gold) {
+        gold.destroy();
+        this.goldCont++;
     }
 }
 
