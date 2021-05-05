@@ -1,5 +1,6 @@
 import Level1 from "./scenes/Level1.js";
 import Level2 from "./scenes/Level2.js";
+import Level3 from "./scenes/Level3.js";
 
 const config = {
     type: Phaser.CANVAS,
@@ -11,7 +12,7 @@ const config = {
 		default: "arcade"
 	},
     scene: [
-        Level2
+        Level3
     ]
 };
 
