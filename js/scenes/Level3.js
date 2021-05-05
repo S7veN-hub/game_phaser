@@ -67,7 +67,7 @@ class Level3 extends Phaser.Scene {
         });
         this.events.on("load_flying_alien2", (h) => {
             this.flying_alien2 = this.physics.add.sprite(this.width + 100, h, "flying_aliens").setScale(0.3);
-            console.log(h)
+
             this.tweens.add({
                 targets: this.flying_alien2,
                 x: -100,
@@ -87,6 +87,30 @@ class Level3 extends Phaser.Scene {
             this.flying_alien2.anims.play("flying_alien2");
 
             this.physics.add.collider(this.heroe, this.flying_alien2, this.alienCollision, null, this);
+        });
+
+        this.events.on("load_flying_alien3", (h) => {
+            this.flying_alien3 = this.physics.add.sprite(this.width + 100, h, "flying_aliens").setScale(0.3);
+
+            this.tweens.add({
+                targets: this.flying_alien3,
+                x: -100,
+                duration: 9000,
+            });
+
+            this.anims.create({
+                key: "flying_alien3",
+                frames: this.anims.generateFrameNames("flying_aliens", {
+                    prefix: "flying_alien",
+                    start: 7,
+                    end: 9
+                }),
+                repeat: -1,
+                frameRate: 1
+            });
+            this.flying_alien3.anims.play("flying_alien3");
+
+            this.physics.add.collider(this.heroe, this.flying_alien3, this.alienCollision, null, this);
         });
 
         //animations
@@ -114,6 +138,7 @@ class Level3 extends Phaser.Scene {
     update(time, delta) {
         this.cont_flying_alien1++;
         this.cont_flying_alien2++;
+        this.cont_flying_alien3++;
         this.cont_platform++;
         if (this.cont_platform == 180) {
             this.cont_platform = 0;
@@ -128,6 +153,11 @@ class Level3 extends Phaser.Scene {
             this.cont_flying_alien2 = 0;
             this.h = Phaser.Math.Between(this.height / 2, this.height / 2 + 100);
             this.events.emit("load_flying_alien2", this.h);
+        }
+        if (this.cont_flying_alien3 == 600) {
+            this.cont_flying_alien3 = 0;
+            this.h = Phaser.Math.Between(20, this.height / 2);
+            this.events.emit("load_flying_alien3", this.h);
         }
 
         if (this.space.isDown && this.heroe.body.touching.down)  {
