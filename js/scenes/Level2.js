@@ -5,9 +5,9 @@ class Level2 extends Phaser.Scene {
         });
     }
 
-   /*  init(c) {
+    init(c) {
         this.atlas = c;
-    } */
+    }
     preload() {
         this.load.path = "./assets/";
 
