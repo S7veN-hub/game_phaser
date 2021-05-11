@@ -5,6 +5,9 @@ class Level1 extends Phaser.Scene {
         });
     }
 
+    init(c) {
+        this.atlas = c;
+    }
     preload() {
         this.load.path = "./assets/";
 
@@ -21,7 +24,6 @@ class Level1 extends Phaser.Scene {
     }
     create() {
         console.log(this);
-        this.atlas = "dog";
         this.width = 800;
         this.height = 600;
         this.cont = 0;
@@ -29,7 +31,7 @@ class Level1 extends Phaser.Scene {
         this.silverCont = 0;
         this.goldCont = 0;
 
-        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2, "dog").setScale(0.15);
+        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2, this.atlas).setScale(0.15);
         this.heroe.setCollideWorldBounds(true);
 
         this.alien1 = this.physics.add.sprite(50, 50, "aliens").setScale(1.5);
@@ -586,8 +588,8 @@ class Level1 extends Phaser.Scene {
         if (this.goldCont == 8) {
             this.goldCont = 0;
             console.log("All gold catched");
-            console.log("Ganaste ;)");
-            this.scene.pause("Level1");
+            console.log("Ganaste el Nivel 1 ;)");
+            this.scene.start("Level1Gained", this.atlas);
         }
 
         if (this.right.isDown) {

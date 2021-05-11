@@ -5,6 +5,9 @@ class Level2 extends Phaser.Scene {
         });
     }
 
+   /*  init(c) {
+        this.atlas = c;
+    } */
     preload() {
         this.load.path = "./assets/";
 
@@ -23,8 +26,8 @@ class Level2 extends Phaser.Scene {
         this.load.atlas("gold_coins", "gold_coins/gold_coins.png", "gold_coins/gold_coins_atlas.json");
     }
     create() {
+        this.atlas = "cat";
         console.log(this);
-        this.atlas = "dog";
         this.width = 800;
         this.height = 600;
         this.cont = 0;
@@ -34,7 +37,7 @@ class Level2 extends Phaser.Scene {
 
         this.physics.world.setBoundsCollision(true, true, true, false);
 
-        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2 + 50, "dog").setScale(0.15);
+        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2 + 50, this.atlas).setScale(0.15);
         this.heroe.setCollideWorldBounds(true);
         this.heroe.body.setGravityY(500);
 
@@ -292,8 +295,8 @@ class Level2 extends Phaser.Scene {
         if (this.goldCont == 4) {
             this.goldCont = 0;
             console.log("All gold catched");
-            console.log("Ganaste ;)");
-            this.scene.pause("Level2");
+            console.log("Ganaste el Nivel 2 ;)");
+            this.scene.start("Level2Gained", this.atlas);
         }
 
         if (this.right.isDown) {

@@ -16,6 +16,7 @@ class Intro extends Phaser.Scene {
         console.log(this);
         this.width = 800;
         this.height = 600;
+        this.character = "";
 
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x3D6492);
@@ -97,6 +98,14 @@ class Intro extends Phaser.Scene {
         }
         if (this.x.isDown) {
             this.pointer.x = this.width / 2 + 150;
+        }
+        if (this.space.isDown) {
+            if (this.pointer.x < this.width / 2) {
+                this.character = "dog";
+            } else {
+                this.character = "cat";
+            }
+            this.scene.start("Transition1", this.character);
         }
     }
 }

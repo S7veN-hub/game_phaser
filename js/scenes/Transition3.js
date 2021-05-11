@@ -5,6 +5,9 @@ class Transition3 extends Phaser.Scene {
         });
     }
 
+    init(c) {
+        this.character = c;
+    }
     preload() {
         this.load.path = "./assets/";
 
@@ -50,9 +53,11 @@ class Transition3 extends Phaser.Scene {
 
         console.log(Phaser.Input.Keyboard.KeyCodes); //types code
 
+        this.space = this.input.keyboard.addKey(32);
+
         //animations
         this.anims.create({
-            key: "walk_right",
+            key: "run_r",
             frames: this.anims.generateFrameNames("dog", {
                 prefix: "run_r_",
                 start: 1,
@@ -61,9 +66,9 @@ class Transition3 extends Phaser.Scene {
             repeat: -1,
             frameRate: 10
         });
-        this.heroe.anims.play("walk_right");
+        this.heroe.anims.play("run_r");
         this.anims.create({
-            key: "gold",
+            key: "coin",
             frames: this.anims.generateFrameNames("gold_coins", {
                 prefix: "gold_",
                 start: 0,
@@ -72,7 +77,7 @@ class Transition3 extends Phaser.Scene {
             repeat: -1,
             frameRate: 10
         });
-        this.coin.anims.play("gold");
+        this.coin.anims.play("coin");
         this.anims.create({
             key: "flying_alien",
             frames: this.anims.generateFrameNames("flying_aliens", {
@@ -87,7 +92,9 @@ class Transition3 extends Phaser.Scene {
         //animations
     }
     update(time, delta) {
-
+        if (this.space.isDown) {
+            this.scene.start("Level3", this.character);
+        }
     }
 }
 

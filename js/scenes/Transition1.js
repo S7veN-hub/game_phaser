@@ -5,10 +5,14 @@ class Transition1 extends Phaser.Scene {
         });
     }
 
+    init(c) {
+        this.character = c;
+    }
     preload() {
         this.load.path = "./assets/";
 
         this.load.atlas("dog", "dog/dog.png", "dog/dog_atlas.json");
+        this.load.atlas("cat", "cat/cat.png", "cat/cat_atlas.json");
         this.load.atlas("gold_coins", "gold_coins/gold_coins.png", "gold_coins/gold_coins_atlas.json");
         this.load.image("red_laser", "lasers/red_laser.png");
     }
@@ -60,9 +64,11 @@ class Transition1 extends Phaser.Scene {
 
         console.log(Phaser.Input.Keyboard.KeyCodes); //types code
 
+        this.space = this.input.keyboard.addKey(32);
+
         //animations
         this.anims.create({
-            key: "walk_right",
+            key: "run_r",
             frames: this.anims.generateFrameNames("dog", {
                 prefix: "run_r_",
                 start: 1,
@@ -71,9 +77,9 @@ class Transition1 extends Phaser.Scene {
             repeat: -1,
             frameRate: 10
         });
-        this.heroe.anims.play("walk_right");
+        this.heroe.anims.play("run_r");
         this.anims.create({
-            key: "gold",
+            key: "coin",
             frames: this.anims.generateFrameNames("gold_coins", {
                 prefix: "gold_",
                 start: 0,
@@ -82,11 +88,13 @@ class Transition1 extends Phaser.Scene {
             repeat: -1,
             frameRate: 10
         });
-        this.coin.anims.play("gold");
+        this.coin.anims.play("coin");
         //animations
     }
     update(time, delta) {
-
+        if (this.space.isDown) {
+            this.scene.start("Level1", this.character);
+        }
     }
 }
 

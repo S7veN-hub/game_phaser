@@ -5,6 +5,9 @@ class Level3 extends Phaser.Scene {
         });
     }
 
+    init(c) {
+        this.atlas = c;
+    }
     preload() {
         this.load.path = "./assets/";
 
@@ -20,7 +23,6 @@ class Level3 extends Phaser.Scene {
     }
     create() {
         console.log(this);
-        this.atlas = "dog";
         this.width = 800;
         this.height = 600;
         this.cont_flying_alien1 = 0;
