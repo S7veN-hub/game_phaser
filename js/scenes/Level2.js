@@ -26,7 +26,6 @@ class Level2 extends Phaser.Scene {
         this.load.atlas("gold_coins", "gold_coins/gold_coins.png", "gold_coins/gold_coins_atlas.json");
     }
     create() {
-        this.atlas = "cat";
         console.log(this);
         this.width = 800;
         this.height = 600;
