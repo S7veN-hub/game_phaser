@@ -30,6 +30,22 @@ class Level1 extends Phaser.Scene {
         this.copperCont = 0;
         this.silverCont = 0;
         this.goldCont = 0;
+        this.points = 0;
+
+        //points
+        this.pointText = this.add.text(10, 10, "POINTS : ", {
+            fontFamily: "Georgia",
+            color: "#F14294"
+        });
+        this.pointNumber = this.add.text(90, 10, "0", {
+            fontFamily: "Georgia",
+            color: "#F14294",
+        });
+        this.events.on("point", () => {
+            this.points += 10;
+            this.pointNumber.setText(this.points);
+        });
+        //points
 
         this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2, this.atlas).setScale(0.15);
         this.heroe.setCollideWorldBounds(true);
@@ -589,7 +605,7 @@ class Level1 extends Phaser.Scene {
             this.goldCont = 0;
             console.log("All gold catched");
             console.log("Ganaste el Nivel 1 ;)");
-            this.scene.start("Level1Gained", this.atlas);
+            this.scene.start("Level1Gained", {character: this.atlas, points: this.points});
         }
 
         if (this.right.isDown) {
@@ -680,14 +696,17 @@ class Level1 extends Phaser.Scene {
     copperCatched(heroe, copper) {
         copper.destroy();
         this.copperCont++;
+        this.events.emit("point");
     }
     silverCatched(heroe, silver) {
         silver.destroy();
         this.silverCont++;
+        this.events.emit("point");
     }
     goldCatched(heroe, gold) {
         gold.destroy();
         this.goldCont++;
+        this.events.emit("point");
     }
 }
 

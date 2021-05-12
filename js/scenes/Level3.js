@@ -6,7 +6,8 @@ class Level3 extends Phaser.Scene {
     }
 
     init(c) {
-        this.atlas = c;
+        this.atlas = c.character;
+        this.points = c.points;
     }
     preload() {
         this.load.path = "./assets/";
@@ -30,6 +31,21 @@ class Level3 extends Phaser.Scene {
         this.cont_flying_alien3 = 0;
         this.cont_platform = 0;
         this.cont_coin = 0;
+
+        //points
+        this.pointText = this.add.text(10, 10, "POINTS : ", {
+            fontFamily: "Georgia",
+            color: "#F14294"
+        });
+        this.pointNumber = this.add.text(90, 10, this.points, {
+            fontFamily: "Georgia",
+            color: "#F14294",
+        });
+        this.events.on("point", () => {
+            this.points += 10;
+            this.pointNumber.setText(this.points);
+        });
+        //points
 
         this.floor = this.physics.add.image(this.width / 2, this.height / 2 + 300, "floor").setImmovable(true).setDepth(-1);
 
@@ -204,6 +220,7 @@ class Level3 extends Phaser.Scene {
     }
     coinCatched(heroe, coin) {
         coin.destroy();
+        this.events.emit("point");
     }
 }
 

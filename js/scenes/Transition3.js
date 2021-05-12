@@ -6,7 +6,7 @@ class Transition3 extends Phaser.Scene {
     }
 
     init(c) {
-        this.character = c;
+        this.data = c;
     }
     preload() {
         this.load.path = "./assets/";
@@ -93,7 +93,7 @@ class Transition3 extends Phaser.Scene {
     }
     update(time, delta) {
         if (this.space.isDown) {
-            this.scene.start("Level3", this.character);
+            this.scene.start("Level3", this.data);
         }
     }
 }
