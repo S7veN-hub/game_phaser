@@ -7,6 +7,7 @@ import Level2 from "./scenes/Level2.js";
 import Level2Gained from "./scenes/Level2Gained.js";
 import Transition3 from "./scenes/Transition3.js";
 import Level3 from "./scenes/Level3.js";
+import GameOver from "./scenes/GameOver.js";
 
 const config = {
     type: Phaser.CANVAS,
@@ -26,7 +27,8 @@ const config = {
         Level2,
         Level2Gained,
         Transition3,
-        Level3
+        Level3,
+        GameOver
     ]
 };
 

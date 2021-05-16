@@ -136,7 +136,7 @@ class Level2 extends Phaser.Scene {
 
         this.events.on("fallen_heroe", () => {
             console.log("Muerto :(");
-            this.scene.pause("Level2");
+            this.scene.start("GameOver", this.points);
         });
 
         //animations

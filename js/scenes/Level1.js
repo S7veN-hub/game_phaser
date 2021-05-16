@@ -691,7 +691,7 @@ class Level1 extends Phaser.Scene {
     }    
     redLaserCollision() {
         console.log("Muerto :(");
-        this.scene.pause("Level1");
+        this.scene.start("GameOver", this.points);
     }
     copperCatched(heroe, copper) {
         copper.destroy();
