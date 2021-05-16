@@ -41,10 +41,6 @@ class Level3 extends Phaser.Scene {
             fontFamily: "Georgia",
             color: "#F14294",
         });
-        this.events.on("point", () => {
-            this.points += 10;
-            this.pointNumber.setText(this.points);
-        });
         //points
 
         this.floor = this.physics.add.image(this.width / 2, this.height / 2 + 300, "floor").setImmovable(true).setDepth(-1);
@@ -220,7 +216,8 @@ class Level3 extends Phaser.Scene {
     }
     coinCatched(heroe, coin) {
         coin.destroy();
-        this.events.emit("point");
+        this.points += 10;
+        this.pointNumber.setText(this.points);
     }
 }
 

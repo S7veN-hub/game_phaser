@@ -31,7 +31,7 @@ class Level1 extends Phaser.Scene {
         this.silverCont = 0;
         this.goldCont = 0;
         this.points = 0;
-
+        
         //points
         this.pointText = this.add.text(10, 10, "POINTS : ", {
             fontFamily: "Georgia",
@@ -40,10 +40,6 @@ class Level1 extends Phaser.Scene {
         this.pointNumber = this.add.text(90, 10, "0", {
             fontFamily: "Georgia",
             color: "#F14294",
-        });
-        this.events.on("point", () => {
-            this.points += 10;
-            this.pointNumber.setText(this.points);
         });
         //points
 
@@ -696,17 +692,20 @@ class Level1 extends Phaser.Scene {
     copperCatched(heroe, copper) {
         copper.destroy();
         this.copperCont++;
-        this.events.emit("point");
+        this.points += 10;
+        this.pointNumber.setText(this.points);
     }
     silverCatched(heroe, silver) {
         silver.destroy();
         this.silverCont++;
-        this.events.emit("point");
+        this.points += 10;
+        this.pointNumber.setText(this.points);
     }
     goldCatched(heroe, gold) {
         gold.destroy();
         this.goldCont++;
-        this.events.emit("point");
+        this.points += 10;
+        this.pointNumber.setText(this.points);
     }
 }
 

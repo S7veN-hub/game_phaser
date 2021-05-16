@@ -11,7 +11,7 @@ import GameOver from "./scenes/GameOver.js";
 
 const config = {
     type: Phaser.CANVAS,
-    width:800,
+    width: 800,
     height: 600,
 	parent: "container",  			//contenedor del juego(id)
 	backgroundColor: "#fff",

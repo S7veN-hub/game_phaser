@@ -44,10 +44,6 @@ class Level2 extends Phaser.Scene {
             fontFamily: "Georgia",
             color: "#F14294",
         });
-        this.events.on("point", () => {
-            this.points += 10;
-            this.pointNumber.setText(this.points);
-        });
         //points
 
         this.physics.world.setBoundsCollision(true, true, true, false);
@@ -341,17 +337,20 @@ class Level2 extends Phaser.Scene {
     copperCatched(heroe, copper) {
         copper.destroy();
         this.copperCont++;
-        this.events.emit("point");
+        this.points += 10;
+        this.pointNumber.setText(this.points);
     }
     silverCatched(heroe, silver) {
         silver.destroy();
         this.silverCont++;
-        this.events.emit("point");
+        this.points += 10;
+        this.pointNumber.setText(this.points);
     }
     goldCatched(heroe, gold) {
         gold.destroy();
         this.goldCont++;
-        this.events.emit("point");
+        this.points += 10;
+        this.pointNumber.setText(this.points);
     }
 }
 
