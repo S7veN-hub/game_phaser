@@ -21,6 +21,8 @@ class Level1 extends Phaser.Scene {
         this.load.atlas("gold_coins", "gold_coins/gold_coins.png", "gold_coins/gold_coins_atlas.json");
 
         this.load.image("red_laser", "lasers/red_laser.png");
+
+        this.load.audio("action", "audios/action.mp3");
     }
     create() {
         console.log(this);
@@ -31,6 +33,12 @@ class Level1 extends Phaser.Scene {
         this.silverCont = 0;
         this.goldCont = 0;
         this.points = 0;
+
+        //audio
+        this.audio_action = this.sound.add("action", {loop: true});   
+        this.audio_action.play();
+        this.sound.pauseOnBlur = false;
+        //audio
         
         //points
         this.pointText = this.add.text(10, 10, "POINTS : ", {
@@ -700,6 +708,7 @@ class Level1 extends Phaser.Scene {
         this.red_laser1.setVelocityY(200);
         this.red_laser2 = this.physics.add.image(this.alien8.x, this.alien8.y, "red_laser").setDepth(2);
         this.red_laser2.setVelocityY(-200);
+        // this.audio_laser.play(); 
 
         this.physics.add.collider(this.heroe, this.red_laser1, this.redLaserCollision, null, this);
         this.physics.add.collider(this.heroe, this.red_laser2, this.redLaserCollision, null, this);

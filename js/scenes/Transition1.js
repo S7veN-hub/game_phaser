@@ -6,7 +6,8 @@ class Transition1 extends Phaser.Scene {
     }
 
     init(c) {
-        this.data = c;
+        this.character = c.character;
+        this.audio = c.audio;
     }
     preload() {
         this.load.path = "./assets/";
@@ -20,7 +21,7 @@ class Transition1 extends Phaser.Scene {
         console.log(this);
         this.width = 800;
         this.height = 600;
-
+        
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0xE4D2AE);
 
@@ -93,7 +94,8 @@ class Transition1 extends Phaser.Scene {
     }
     update(time, delta) {
         if (this.space.isDown) {
-            this.scene.start("Level1", this.data);
+            this.audio.stop();
+            this.scene.start("Level1", {character: this.character});
         }
     }
 }

@@ -9,12 +9,20 @@ class GameOver extends Phaser.Scene {
         this.points = c.points;
     }
     preload() {
+        this.load.path = "./assets/";
 
+        this.load.audio("finish", "audios/doodle.mp3");
     }
     create() {
         console.log(this);
         this.width = 800;
         this.height = 600;
+
+        //audio
+        /* this.audio_finish = this.sound.add("finish", {loop: true});   
+        this.audio_finish.play();
+        this.sound.pauseOnBlur = false; */
+        //audio
 
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0xF683B9);

@@ -12,7 +12,8 @@ class Intro extends Phaser.Scene {
         this.load.atlas("cat", "cat/cat.png", "cat/cat_atlas.json");
         this.load.atlas("pointer", "pointer/pointer.png", "pointer/pointer_atlas.json");
 
-        // this.load.audio("menu", "audios/menu.mp3");
+        this.load.audio("menu", "audios/menu.mp3");
+        this.load.audio("click", "audios/click.wav");
     }
     create() {
         console.log(this);
@@ -21,9 +22,10 @@ class Intro extends Phaser.Scene {
         this.character = "";
 
         //audio
-        /* this.audio_menu = this.sound.add("menu", {loop: true});
+        this.audio_menu = this.sound.add("menu", {loop: true});
         this.audio_menu.play();
-        this.sound.pauseOnBlur = false; */
+        this.audio_click = this.sound.add("click", {loop: false});
+        this.sound.pauseOnBlur = false;
         //audio
 
         this.graphics = this.add.graphics();
@@ -103,9 +105,11 @@ class Intro extends Phaser.Scene {
     update(time, delta) {
         if (this.z.isDown) {
             this.pointer.x = this.width / 2 - 150;
+            this.audio_click.play();
         }
         if (this.x.isDown) {
             this.pointer.x = this.width / 2 + 150;
+            this.audio_click.play();
         }
         if (this.space.isDown) {
             if (this.pointer.x < this.width / 2) {
@@ -113,8 +117,7 @@ class Intro extends Phaser.Scene {
             } else {
                 this.character = "cat";
             }
-            // this.audio_menu.stop();
-            this.scene.start("Transition1", {character: this.character});
+            this.scene.start("Transition1", {character: this.character, audio: this.audio_menu});
         }
     }
 }
