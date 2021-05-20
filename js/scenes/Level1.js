@@ -23,6 +23,8 @@ class Level1 extends Phaser.Scene {
         this.load.image("red_laser", "lasers/red_laser.png");
 
         this.load.audio("action", "audios/action.mp3");
+        this.load.audio("laserA", "audios/laser.wav");
+        this.load.audio("coinA", "audios/coin01.wav");
     }
     create() {
         console.log(this);
@@ -37,6 +39,8 @@ class Level1 extends Phaser.Scene {
         //audio
         this.audio_action = this.sound.add("action", {loop: true});   
         this.audio_action.play();
+        this.audio_laser = this.sound.add("laserA", {loop: false});
+        this.audio_coin = this.sound.add("coinA", {loop: false}); 
         this.sound.pauseOnBlur = false;
         //audio
         
@@ -610,18 +614,21 @@ class Level1 extends Phaser.Scene {
         this.scene.start("GameOver", {points: this.points});
     }
     copperCatched(heroe, copper) {
+        this.audio_coin.play();
         copper.destroy();
         this.copperCont++;
         this.points += 10;
         this.pointNumber.setText(this.points);
     }
     silverCatched(heroe, silver) {
+        this.audio_coin.play();
         silver.destroy();
         this.silverCont++;
         this.points += 10;
         this.pointNumber.setText(this.points);
     }
     goldCatched(heroe, gold) {
+        this.audio_coin.play();
         gold.destroy();
         this.goldCont++;
         this.points += 10;
@@ -708,7 +715,7 @@ class Level1 extends Phaser.Scene {
         this.red_laser1.setVelocityY(200);
         this.red_laser2 = this.physics.add.image(this.alien8.x, this.alien8.y, "red_laser").setDepth(2);
         this.red_laser2.setVelocityY(-200);
-        // this.audio_laser.play(); 
+        this.audio_laser.play(); 
 
         this.physics.add.collider(this.heroe, this.red_laser1, this.redLaserCollision, null, this);
         this.physics.add.collider(this.heroe, this.red_laser2, this.redLaserCollision, null, this);

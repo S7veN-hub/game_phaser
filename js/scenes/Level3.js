@@ -21,6 +21,9 @@ class Level3 extends Phaser.Scene {
 
         this.load.image("platform", "platform/platform.png");
         this.load.image("floor", "floor/floor.png");
+
+        this.load.audio("jumpA", "audios/jump.wav");
+        this.load.audio("coinA", "audios/coin01.wav");
     }
     create() {
         console.log(this);
@@ -31,6 +34,11 @@ class Level3 extends Phaser.Scene {
         this.cont_flying_alien3 = 0;
         this.cont_platform = 0;
         this.cont_coin = 0;
+
+        //audio
+        this.audio_jump = this.sound.add("jumpA", {loop: false});
+        this.audio_coin = this.sound.add("coinA", {loop: false});
+        //audio
 
         //points
         this.pointText = this.add.text(10, 10, "POINTS : ", {
@@ -103,6 +111,7 @@ class Level3 extends Phaser.Scene {
 
         if (this.space.isDown && this.heroe.body.touching.down)  {
             this.heroe.setVelocityY(-400);
+            this.audio_jump.play();
         }
     }
 
@@ -111,6 +120,7 @@ class Level3 extends Phaser.Scene {
         this.scene.start("GameOver", {points: this.points});
     }
     coinCatched(heroe, coin) {
+        this.audio_coin.play();
         coin.destroy();
         this.points += 10;
         this.pointNumber.setText(this.points);

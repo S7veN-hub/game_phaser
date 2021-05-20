@@ -25,6 +25,10 @@ class Level2 extends Phaser.Scene {
         this.load.atlas("copper_coins", "copper_coins/copper_coins.png", "copper_coins/copper_coins_atlas.json");
         this.load.atlas("silver_coins", "silver_coins/silver_coins.png", "silver_coins/silver_coins_atlas.json");
         this.load.atlas("gold_coins", "gold_coins/gold_coins.png", "gold_coins/gold_coins_atlas.json");
+
+        this.load.audio("laserA", "audios/laser.wav");
+        this.load.audio("coinA", "audios/coin01.wav");
+        this.load.audio("jumpA", "audios/jump01.wav");
     }
     create() {
         console.log(this);
@@ -34,6 +38,12 @@ class Level2 extends Phaser.Scene {
         this.copperCont = 0;
         this.silverCont = 0;
         this.goldCont = 0;
+
+        //audio
+        this.audio_laser = this.sound.add("laserA", {loop: false});
+        this.audio_coin = this.sound.add("coinA", {loop: false});
+        this.audio_jump = this.sound.add("jumpA", {loop: false, volume: 1}); 
+        //audio
 
         //points
         this.pointText = this.add.text(10, 10, "POINTS : ", {
@@ -256,6 +266,7 @@ class Level2 extends Phaser.Scene {
         if (this.up.isDown && this.heroe.body.touching.down) {
             this.heroe.setVelocityY(-350);
             this.heroe.anims.play("jump", true);
+            this.audio_jump.play();
         }
         if (this.down.isDown) {
             this.heroe.y += 0;
@@ -270,18 +281,21 @@ class Level2 extends Phaser.Scene {
     }
 
     copperCatched(heroe, copper) {
+        this.audio_coin.play();
         copper.destroy();
         this.copperCont++;
         this.points += 10;
         this.pointNumber.setText(this.points);
     }
     silverCatched(heroe, silver) {
+        this.audio_coin.play();
         silver.destroy();
         this.silverCont++;
         this.points += 10;
         this.pointNumber.setText(this.points);
     }
     goldCatched(heroe, gold) {
+        this.audio_coin.play();
         gold.destroy();
         this.goldCont++;
         this.points += 10;
@@ -346,6 +360,7 @@ class Level2 extends Phaser.Scene {
         this.ball_energy2.setGravity(-300, 600);
         this.ball_energy3 = this.physics.add.image(this.ovni.x, this.ovni.y, "ball_energy").setScale(0.5);
         this.ball_energy3.setGravity(300, 600);
+        this.audio_laser.play();
 
         this.physics.add.collider(this.heroe, this.ball_energy1, this.laserCollision, null, this);
         this.physics.add.collider(this.heroe, this.ball_energy2, this.laserCollision, null, this);
