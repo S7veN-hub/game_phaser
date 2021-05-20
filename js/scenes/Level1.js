@@ -43,8 +43,8 @@ class Level1 extends Phaser.Scene {
         });
         //points
 
-        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2, this.atlas).setScale(0.15);console.log(this.atlas);
-        this.heroe.setCollideWorldBounds(true);console.log(this.heroe);
+        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2, this.atlas).setScale(0.15);
+        this.heroe.setCollideWorldBounds(true);
 
         this.alien1 = this.physics.add.sprite(50, 50, "aliens").setScale(1.5);
         this.alien2 = this.physics.add.sprite(this.width - 50, 50, "aliens").setScale(1.5);

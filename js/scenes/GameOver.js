@@ -48,7 +48,7 @@ class GameOver extends Phaser.Scene {
     }
     update() {
         if (this.space.isDown) {
-            this.scene.start("Intro");
+            location.reload();
         }
     }
 }
