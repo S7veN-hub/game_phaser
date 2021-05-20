@@ -6,7 +6,7 @@ class GameOver extends Phaser.Scene {
     }
 
     init(c) {
-        this.points = c;
+        this.points = c.points;
     }
     preload() {
 

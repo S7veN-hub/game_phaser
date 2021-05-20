@@ -11,12 +11,20 @@ class Intro extends Phaser.Scene {
         this.load.atlas("dog", "dog/dog.png", "dog/dog_atlas.json");
         this.load.atlas("cat", "cat/cat.png", "cat/cat_atlas.json");
         this.load.atlas("pointer", "pointer/pointer.png", "pointer/pointer_atlas.json");
+
+        // this.load.audio("menu", "audios/menu.mp3");
     }
     create() {
         console.log(this);
         this.width = 800;
         this.height = 600;
         this.character = "";
+
+        //audio
+        /* this.audio_menu = this.sound.add("menu", {loop: true});
+        this.audio_menu.play();
+        this.sound.pauseOnBlur = false; */
+        //audio
 
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x3D6492);
@@ -105,7 +113,8 @@ class Intro extends Phaser.Scene {
             } else {
                 this.character = "cat";
             }
-            this.scene.start("Transition1", this.character);
+            // this.audio_menu.stop();
+            this.scene.start("Transition1", {character: this.character});
         }
     }
 }

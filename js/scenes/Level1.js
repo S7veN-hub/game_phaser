@@ -6,7 +6,7 @@ class Level1 extends Phaser.Scene {
     }
 
     init(c) {
-        this.atlas = c;
+        this.atlas = c.character;
     }
     preload() {
         this.load.path = "./assets/";
@@ -43,8 +43,8 @@ class Level1 extends Phaser.Scene {
         });
         //points
 
-        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2, this.atlas).setScale(0.15);
-        this.heroe.setCollideWorldBounds(true);
+        this.heroe = this.physics.add.sprite(this.width / 2, this.height / 2, this.atlas).setScale(0.15);console.log(this.atlas);
+        this.heroe.setCollideWorldBounds(true);console.log(this.heroe);
 
         this.alien1 = this.physics.add.sprite(50, 50, "aliens").setScale(1.5);
         this.alien2 = this.physics.add.sprite(this.width - 50, 50, "aliens").setScale(1.5);
@@ -599,7 +599,7 @@ class Level1 extends Phaser.Scene {
     }    
     redLaserCollision() {
         console.log("Muerto :(");
-        this.scene.start("GameOver", this.points);
+        this.scene.start("GameOver", {points: this.points});
     }
     copperCatched(heroe, copper) {
         copper.destroy();

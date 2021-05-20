@@ -108,7 +108,7 @@ class Level3 extends Phaser.Scene {
 
     alienCollision() {
         console.log("Muerto :(");
-        this.scene.start("GameOver", this.points);
+        this.scene.start("GameOver", {points: this.points});
     }
     coinCatched(heroe, coin) {
         coin.destroy();
