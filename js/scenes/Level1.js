@@ -25,6 +25,7 @@ class Level1 extends Phaser.Scene {
         this.load.audio("action", "audios/action.mp3");
         this.load.audio("laserA", "audios/laser.wav");
         this.load.audio("coinA", "audios/coin01.wav");
+        this.load.audio("alienA", "audios/colisionalien.wav");
     }
     create() {
         console.log(this);
@@ -40,7 +41,8 @@ class Level1 extends Phaser.Scene {
         this.audio_action = this.sound.add("action", {loop: true});   
         this.audio_action.play();
         this.audio_laser = this.sound.add("laserA", {loop: false});
-        this.audio_coin = this.sound.add("coinA", {loop: false}); 
+        this.audio_coin = this.sound.add("coinA", {loop: false});
+        this.audio_alien = this.sound.add("alienA", {loop: false}); 
         this.sound.pauseOnBlur = false;
         //audio
         
@@ -607,6 +609,9 @@ class Level1 extends Phaser.Scene {
 
     alienCollision() {
         console.log("Colision con alien");
+        this.audio_alien.play();
+        this.points -= 1;
+        this.pointNumber.setText(this.points);
         this.heroe.setPosition(this.width / 2, this.height / 2);
     }    
     redLaserCollision() {

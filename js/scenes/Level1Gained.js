@@ -13,11 +13,16 @@ class Level1Gained extends Phaser.Scene {
 
         this.load.atlas("dog", "dog/dog.png", "dog/dog_atlas.json");
         this.load.atlas("cat", "cat/cat.png", "cat/cat_atlas.json");
+        this.load.audio("select", "audios/select.wav");
     }
     create() {
         console.log(this);
         this.width = 800;
         this.height = 600;
+
+        //audios
+        this.audio_select = this.sound.add("select", {loop: false});
+        //audios
 
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0xE4D2AE);
@@ -56,6 +61,7 @@ class Level1Gained extends Phaser.Scene {
     }
     update(time, delta) {
         if (this.space.isDown) {
+            this.audio_select.play();
             this.scene.start("Transition2", this.data);
         }
     }

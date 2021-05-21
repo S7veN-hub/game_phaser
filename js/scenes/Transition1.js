@@ -16,11 +16,16 @@ class Transition1 extends Phaser.Scene {
         this.load.atlas("cat", "cat/cat.png", "cat/cat_atlas.json");
         this.load.atlas("gold_coins", "gold_coins/gold_coins.png", "gold_coins/gold_coins_atlas.json");
         this.load.image("red_laser", "lasers/red_laser.png");
+        this.load.audio("select", "audios/select.wav");
     }
     create() {
         console.log(this);
         this.width = 800;
         this.height = 600;
+
+        //audios
+        this.audio_select = this.sound.add("select", {loop: false});
+        //audios
         
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0xE4D2AE);
@@ -95,6 +100,7 @@ class Transition1 extends Phaser.Scene {
     update(time, delta) {
         if (this.space.isDown) {
             this.audio.stop();
+            this.audio_select.play();
             this.scene.start("Level1", {character: this.character});
         }
     }

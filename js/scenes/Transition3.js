@@ -14,11 +14,16 @@ class Transition3 extends Phaser.Scene {
         this.load.atlas("dog", "dog/dog.png", "dog/dog_atlas.json");
         this.load.atlas("gold_coins", "gold_coins/gold_coins.png", "gold_coins/gold_coins_atlas.json");
         this.load.atlas("flying_aliens", "flying_aliens/flying_aliens.png", "flying_aliens/flying_aliens_atlas.json");
+        this.load.audio("select", "audios/select.wav");
     }
     create() {
         console.log(this);
         this.width = 800;
         this.height = 600;
+
+        //audios
+        this.audio_select = this.sound.add("select", {loop: false});
+        //audios
 
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0xE4D2AE);
@@ -93,6 +98,7 @@ class Transition3 extends Phaser.Scene {
     }
     update(time, delta) {
         if (this.space.isDown) {
+            this.audio_select.play();
             this.scene.start("Level3", this.data);
         }
     }

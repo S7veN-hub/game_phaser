@@ -235,6 +235,8 @@ class Level2 extends Phaser.Scene {
         }
 
         if (this.heroe.y > this.height + 200) {
+            this.points -= 15;
+            this.pointNumber.setText(this.points);
             this.events.emit("fallen_heroe");
         }
 

@@ -14,6 +14,7 @@ class Intro extends Phaser.Scene {
 
         this.load.audio("menu", "audios/menu.mp3");
         this.load.audio("click", "audios/click.wav");
+        this.load.audio("select", "audios/select.wav");
     }
     create() {
         console.log(this);
@@ -25,6 +26,7 @@ class Intro extends Phaser.Scene {
         this.audio_menu = this.sound.add("menu", {loop: true});
         this.audio_menu.play();
         this.audio_click = this.sound.add("click", {loop: false});
+        this.audio_select = this.sound.add("select", {loop: false});
         this.sound.pauseOnBlur = false;
         //audio
 
@@ -117,6 +119,7 @@ class Intro extends Phaser.Scene {
             } else {
                 this.character = "cat";
             }
+            this.audio_select.play();
             this.scene.start("Transition1", {character: this.character, audio: this.audio_menu});
         }
     }
