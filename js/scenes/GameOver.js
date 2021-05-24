@@ -11,7 +11,6 @@ class GameOver extends Phaser.Scene {
     preload() {
         this.load.path = "./assets/";
 
-        this.load.audio("finish", "audios/doodle.mp3");
         this.load.audio("select", "audios/select.wav");
     }
     create() {
@@ -20,9 +19,6 @@ class GameOver extends Phaser.Scene {
         this.height = 600;
 
         //audio
-        /* this.audio_finish = this.sound.add("finish", {loop: true});   
-        this.audio_finish.play();
-        this.sound.pauseOnBlur = false; */
         this.audio_select = this.sound.add("select", {loop: false});
         //audio
 
@@ -51,15 +47,25 @@ class GameOver extends Phaser.Scene {
             color: "#fff",
             fontSize: 30
         });
+        this.add.text(50, this.height - 80, "C : Record your puntuation", {
+            fontFamily: "Georgia",
+            color: "#D73E85",
+            fontSize: 20
+        });
 
         console.log(Phaser.Input.Keyboard.KeyCodes); //types code
 
         this.space = this.input.keyboard.addKey(32);
+        this.c = this.input.keyboard.addKey(67);
     }
     update() {
         if (this.space.isDown) {
             this.audio_select.play();
             location.reload();
+        }
+        if (this.c.isDown) {
+            this.audio_select.play();
+            window.open("form.html", "_blank");
         }
     }
 }
