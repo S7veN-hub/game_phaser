@@ -22,10 +22,6 @@
         } else {
             $points = 0;
         }
-
-        if (isset($_POST["register"])) {
-            unset($_SESSION["points"]);
-        }
     ?>
     <div class="main">
         <h1>
@@ -33,9 +29,9 @@
             User Register
         </h1>
         <?php
-        if (isset($_GET["points"])) {
+        if (isset($_GET["points"]) && isset($_SESSION["register"])) {
         ?>
-        <form action="form.php" method="post">
+        <form action="./app/register.php" method="post">
             <label for="user">
                 Type your user name to record your puntuation in our database.
             </label>

@@ -19,6 +19,7 @@
         if (isset($_SESSION["points"])) {
             unset($_SESSION["points"]);
         }
+        $_SESSION["register"] = "register";
     ?>
     <div id="section-game">
         <div id="container"></div>
