@@ -64,8 +64,9 @@ class GameOver extends Phaser.Scene {
             location.reload();
         }
         if (this.c.isDown) {
+            console.log("Points sent");
             this.audio_select.play();
-            window.open("form.html", "_blank");
+            window.open("form.php?points="+this.points, "_blank");
         }
     }
 }

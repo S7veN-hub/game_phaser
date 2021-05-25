@@ -28,3 +28,7 @@ form label {
     padding: 0 30%;
     padding-bottom: 30px;
 }
+.points {
+    color: rgb(211, 82, 82);
+    padding-top: 20px;
+}
