@@ -61,6 +61,11 @@ class Intro extends Phaser.Scene {
             color: "#fff",
             fontSize: 30
         });
+        this.add.text(50, 50, "C : Best Scores", {
+            fontFamily: "Georgia",
+            color: "#093C78",
+            fontSize: 20
+        });
 
         //animations
         this.anims.create({
@@ -102,6 +107,7 @@ class Intro extends Phaser.Scene {
 
         this.z = this.input.keyboard.addKey(90);
         this.x = this.input.keyboard.addKey(88);
+        this.c = this.input.keyboard.addKey(67);
         this.space = this.input.keyboard.addKey(32);
     }
     update(time, delta) {
@@ -121,6 +127,11 @@ class Intro extends Phaser.Scene {
             }
             this.audio_select.play();
             this.scene.start("Transition1", {character: this.character, audio: this.audio_menu});
+        }
+        if (this.c.isDown) {
+            this.audio_menu.stop();
+            this.audio_select.play();
+            this.scene.start("BestScores");
         }
     }
 }

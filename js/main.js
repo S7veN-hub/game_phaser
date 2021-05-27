@@ -8,6 +8,7 @@ import Level2Gained from "./scenes/Level2Gained.js";
 import Transition3 from "./scenes/Transition3.js";
 import Level3 from "./scenes/Level3.js";
 import GameOver from "./scenes/GameOver.js";
+import BestScores from "./scenes/BestScores.js";
 
 const config = {
     type: Phaser.CANVAS,
@@ -28,7 +29,8 @@ const config = {
         Level2Gained,
         Transition3,
         Level3,
-        GameOver
+        GameOver,
+        BestScores
     ]
 };
 

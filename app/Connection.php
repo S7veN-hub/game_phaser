@@ -26,7 +26,7 @@ class Connection {
         return $result? true : false;
     }
     public function getPuntuation() {
-        $sql = "select * from dokkat_records order by points desc";
+        $sql = "select * from dokkat_records order by points desc limit 0,5";
 
         $sth = $this->conn->prepare($sql);
         $result = $sth->execute();
