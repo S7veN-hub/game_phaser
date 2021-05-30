@@ -70,7 +70,7 @@ class Level3 extends Phaser.Scene {
         this.heroe.anims.play("walk_right");
         //animations
 
-        console.log(Phaser.Input.Keyboard.KeyCodes); //types code
+        // console.log(Phaser.Input.Keyboard.KeyCodes);
 
         this.space = this.input.keyboard.addKey(32);
 

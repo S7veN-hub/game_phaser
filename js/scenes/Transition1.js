@@ -68,7 +68,7 @@ class Transition1 extends Phaser.Scene {
             fontSize: 30
         });
 
-        console.log(Phaser.Input.Keyboard.KeyCodes); //types code
+        // console.log(Phaser.Input.Keyboard.KeyCodes);
 
         this.space = this.input.keyboard.addKey(32);
 

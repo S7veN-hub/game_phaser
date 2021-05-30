@@ -35,7 +35,7 @@
             <label for="user">
                 Type your user name to record your puntuation in our database.
             </label>
-            <input type="text" name="user" id="user" required="required"><br><br>
+            <input type="text" name="user" id="user" maxlength="15" required="required"><br><br>
             <input type="hidden" name="points" value="<?php echo $points; ?>">
             <input type="submit" value="REGISTER" name="register">
         </form>

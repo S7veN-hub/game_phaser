@@ -14,17 +14,20 @@ if (isset($_POST["register"])) {
                 unset($_SESSION["register"]);
             }
             echo "Recorded";
+            header("Location: ../recorded.php");
         } else {
             if (isset($_SESSION["points"])) {
                 unset($_SESSION["points"]);
             }
             echo "Error";
+            header("Location: ../error.php");
         }
     } else {
         if (isset($_SESSION["points"])) {
             unset($_SESSION["points"]);
         }
         echo "This user already exists";
+        header("Location: ../userexits.php");
     }
 }
 ?>

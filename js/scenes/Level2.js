@@ -207,7 +207,7 @@ class Level2 extends Phaser.Scene {
         });
         //tweens
         
-        console.log(Phaser.Input.Keyboard.KeyCodes); //types code
+        // console.log(Phaser.Input.Keyboard.KeyCodes);
 
         this.right = this.input.keyboard.addKey(68);
         this.left = this.input.keyboard.addKey(65);

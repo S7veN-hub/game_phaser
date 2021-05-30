@@ -53,7 +53,7 @@ class GameOver extends Phaser.Scene {
             fontSize: 20
         });
 
-        console.log(Phaser.Input.Keyboard.KeyCodes); //types code
+        // console.log(Phaser.Input.Keyboard.KeyCodes);
 
         this.space = this.input.keyboard.addKey(32);
         this.c = this.input.keyboard.addKey(67);

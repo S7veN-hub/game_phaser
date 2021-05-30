@@ -103,7 +103,7 @@ class Intro extends Phaser.Scene {
         this.pointer.anims.play("pointer");
         //animations
 
-        console.log(Phaser.Input.Keyboard.KeyCodes); //types code
+        // console.log(Phaser.Input.Keyboard.KeyCodes);
 
         this.z = this.input.keyboard.addKey(90);
         this.x = this.input.keyboard.addKey(88);
