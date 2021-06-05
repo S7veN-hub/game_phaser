@@ -17,7 +17,7 @@
                 $points = $_GET["points"];
                 $_SESSION["points"] = $points;
             } else {
-                $points = 0;
+                $points = $_SESSION["points"];
             }
         } else {
             $points = 0;
